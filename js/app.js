@@ -39,6 +39,7 @@ var player = function(){
 	this.x = 200;
 	this.y = 400;
 	this.lives = 4;
+  this.score = 0;
 	this.livesImage = "images/heart.png";
 };
 
@@ -48,13 +49,16 @@ player.prototype.update = function(){
 
 player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    ctx.font = "14pt Arial";
+    ctx.fillText("Score: "+this.score, 20, 560);
+    ctx.strokeText("Score: "+this.score, 20, 560);
 	for( var i = 0; i < this.lives; i++ ) {
 		ctx.drawImage(Resources.get(this.livesImage), i*40+340, 540, 40, 45 );
 	}
 };
 
 player.prototype.render2 = function(){
-	
+
 };
 
 
@@ -78,6 +82,8 @@ player.prototype.handleInput = function(dir){
 			//reach to water so we reset the position to initials.
 			this.y = 400;
 			this.x = 200;
+      this.score++;
+      console.log(this.score);
 		};
 	};
 	if ( dir == 'down' ){
@@ -86,8 +92,8 @@ player.prototype.handleInput = function(dir){
 			this.y = 400;
 		};
 	};
-	
-	
+
+
 };
 
 
@@ -112,8 +118,6 @@ document.addEventListener('keyup', function(e) {
         39: 'right',
         40: 'down'
     };
-	
+
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
-
