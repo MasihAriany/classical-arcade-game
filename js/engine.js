@@ -97,7 +97,7 @@ var Engine = (function(global) {
         });
         player.update();
     }
-	
+
 	function checkCollisions() {
 		for ( var index=0; index < allEnemies.length; index++) {
 			if ( allEnemies[index].x < player.x + 50 && allEnemies[index].x > player.x - 50 ){
@@ -107,13 +107,14 @@ var Engine = (function(global) {
 					player.lives--;
 					if( player.lives === 0 ){
 						flag = 0;
+            player.score = 0;
 					}
 				};
 			};
 		}
 	}
-	
-	
+
+
     /* This function initially draws the "game level", it will then call
      * the renderEntities function. Remember, this function is called every
      * game tick (or loop of the game engine) because that's how games work -
@@ -124,7 +125,7 @@ var Engine = (function(global) {
         /* This array holds the relative URL to the image used
          * for that particular row of the game level.
          */
-        
+
 		if ( flag == 1 ){
 		var rowImages = [
                 'images/water-block.png',   // Top row is water
@@ -164,11 +165,11 @@ var Engine = (function(global) {
 			ctx.lineWidth = 2;
 			ctx.fillText("GAME OVER!", canvas.width / 2, 250);
 			ctx.strokeText("GAME OVER", canvas.width / 2, 250);
-			
+
 			ctx.font = "20pt Impact";
 			ctx.fillText("new game starts in a moment", canvas.width / 2, 550);
 			ctx.strokeText("new game starts in a moment", canvas.width / 2, 550);
-			
+
 			window.setTimeout(reset,4000);
 			//reset();
 		}
@@ -185,9 +186,9 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
-		
+
         player.render();
-		
+
     }
 
     /* This function does nothing but it could have been a good place to
@@ -198,7 +199,7 @@ var Engine = (function(global) {
         // noop
 		player.lives = 4;
 		flag = 1;
-		
+
     }
 
     /* Go ahead and load all of the images we know we're going to need to
